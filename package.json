@@ -1,0 +1,20 @@
+{
+  "name": "swipe-away",
+  "version": "1.0.0",
+  "description": "An implementation of a swipeable card user interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turingschool-examples/swipe-away.git"
+  },
+  "keywords": [],
+  "author": "Steve Kinney <hello@stevekinney.net> (http://stevekinney.net)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/turingschool-examples/swipe-away/issues"
+  },
+  "homepage": "https://github.com/turingschool-examples/swipe-away#readme"
+}
