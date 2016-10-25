@@ -7,9 +7,9 @@ class Cards {
     this.currentX = 0;
 
     this.update = this.update.bind(this);
-    this.onStart = this.this.onStart.bind(this);
-    this.onMove = this.this.onMove.bind(this);
-    this.onEnd = this.this.onEnd.bind(this);
+    this.onStart = this.onStart.bind(this);
+    this.onMove = this.onMove.bind(this);
+    this.onEnd = this.onEnd.bind(this);
 
     this.addEventListeners();
   }
