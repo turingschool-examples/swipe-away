@@ -4,7 +4,7 @@
   "description": "An implementation of a swipeable card user interface.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/turingschool-examples/swipe-away/issues"
   },
-  "homepage": "https://github.com/turingschool-examples/swipe-away#readme"
+  "homepage": "https://github.com/turingschool-examples/swipe-away#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1"
+  }
 }
