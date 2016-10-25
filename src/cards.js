@@ -7,29 +7,32 @@ class Cards {
     this.currentX = 0;
 
     this.update = this.update.bind(this);
+    this.onStart = this.this.onStart.bind(this);
+    this.onMove = this.this.onMove.bind(this);
+    this.onEnd = this.this.onEnd.bind(this);
 
     this.addEventListeners();
-    requestAnimationFrame(this.update);
   }
 
   addEventListeners () {
-    document.addEventListener('touchstart', e => this.onStart(e));
-    document.addEventListener('touchmove', e => this.onMove(e), { passive: true });
-    document.addEventListener('touchend', e => this.onEnd(e));
+    document.addEventListener('touchstart', this.onStart);
+    document.addEventListener('touchmove', this.onMove);
+    document.addEventListener('touchend', this.onEnd);
 
-    document.addEventListener('mousestart', e => this.onStart(e));
-    document.addEventListener('mousemove', e => this.onMove(e));
-    document.addEventListener('mouseend', e => this.onEnd(e));
+    document.addEventListener('mousestart', this.onStart);
+    document.addEventListener('mousemove', this.onMove);
+    document.addEventListener('mouseend', this.onEnd);
   }
 
   onStart (event) {
     if (!event.target.classList.contains('card')) return;
+    event.preventDefault();
 
     this.target = event.target;
     this.startX = event.pageX || event.touches[0].pageX;
     this.currentX = this.startX;
 
-    event.preventDefault();
+    requestAnimationFrame(this.update);
   }
 
   onMove (event) {
@@ -43,9 +46,8 @@ class Cards {
   }
 
   update (event) {
-    requestAnimationFrame(this.update);
-
     if (!this.target) return;
+    requestAnimationFrame(this.update);
 
     const screenX = this.currentX - this.startX;
 
