@@ -5,6 +5,9 @@ class Cards {
     this.target = null;
     this.startX = 0;
     this.currentX = 0;
+    this.screenX = 0;
+
+    this.draggingCard = false;
 
     this.update = this.update.bind(this);
     this.onStart = this.onStart.bind(this);
@@ -31,6 +34,8 @@ class Cards {
     this.target = event.target;
     this.startX = event.pageX || event.touches[0].pageX;
     this.currentX = this.startX;
+    this.target.style.willChange = 'transform';
+    this.draggingCard = true;
 
     requestAnimationFrame(this.update);
   }
@@ -43,15 +48,20 @@ class Cards {
 
   onEnd (event) {
     if (!this.target) return;
+    this.draggingCard = false;
   }
 
   update (event) {
     if (!this.target) return;
     requestAnimationFrame(this.update);
 
-    const screenX = this.currentX - this.startX;
+    if (this.draggingCard) {
+      this.screenX = this.currentX - this.startX;
+    } else {
+      this.screenX += (0 - this.screenX) / 10;
+    }
 
-    this.target.style.transform = `translateX(${screenX}px)`;
+    this.target.style.transform = `translateX(${this.screenX}px)`;
   }
 }
 
