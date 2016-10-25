@@ -75,7 +75,7 @@ class Cards {
     }
 
     const normalizedDragDistance = Math.abs(this.screenX) / this.targetBoundingClientRect.width;
-    const opacity = 1 - Math.pow(normalizedDragDistance, 2);
+    const opacity = 1 - Math.pow(normalizedDragDistance, 3);
 
     this.target.style.transform = `translateX(${this.screenX}px)`;
     this.target.style.opacity = opacity;
