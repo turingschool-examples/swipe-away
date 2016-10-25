@@ -3,9 +3,11 @@ class Cards {
     this.cards = document.querySelectorAll('.card');
 
     this.target = null;
+    this.targetBoundingClientRect = null;
     this.startX = 0;
     this.currentX = 0;
     this.screenX = 0;
+    this.targetX = 0;
 
     this.draggingCard = false;
 
@@ -32,10 +34,13 @@ class Cards {
     event.preventDefault();
 
     this.target = event.target;
+    this.targetBoundingClientRect = this.target.getBoundingClientRect();
     this.startX = event.pageX || event.touches[0].pageX;
     this.currentX = this.startX;
     this.target.style.willChange = 'transform';
     this.draggingCard = true;
+
+    console.log(this.targetBoundingClientRect);
 
     requestAnimationFrame(this.update);
   }
@@ -48,6 +53,14 @@ class Cards {
 
   onEnd (event) {
     if (!this.target) return;
+
+    const screenX = this.currentX - this.startX;
+    this.targetX = 0;
+
+    if (Math.abs(screenX) > this.targetBoundingClientRect.width * 0.35) {
+      this.targetX = this.targetBoundingClientRect.width * (screenX > 0 ? 1 : -1);
+    }
+
     this.draggingCard = false;
   }
 
@@ -58,10 +71,14 @@ class Cards {
     if (this.draggingCard) {
       this.screenX = this.currentX - this.startX;
     } else {
-      this.screenX += (0 - this.screenX) / 10;
+      this.screenX += (this.targetX - this.screenX) / 10;
     }
 
+    const normalizedDragDistance = Math.abs(this.screenX) / this.targetBoundingClientRect.width;
+    const opacity = 1 - Math.pow(normalizedDragDistance, 2);
+
     this.target.style.transform = `translateX(${this.screenX}px)`;
+    this.target.style.opacity = opacity;
   }
 }
 
