@@ -5,18 +5,23 @@ body, html {
 }
 
 .cards {
-  max-width: 500px;
+  max-width: 450px;
+  padding: 2em;
   margin: auto;
 }
 
 .card {
   margin-bottom: 2em;
+  height: 80px;
   padding: 2em 1em;
 
   background: #FFFFFF;
-  border: 1px solid #979797;
-  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.40);
+  border: 1px solid rgb(225, 225, 255);
+  box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.3);
   font-size: 1.8em;
   font-weight: 300;
-  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
