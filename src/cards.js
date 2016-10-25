@@ -24,12 +24,13 @@ class Cards {
     document.addEventListener('touchmove', this.onMove);
     document.addEventListener('touchend', this.onEnd);
 
-    document.addEventListener('mousestart', this.onStart);
+    document.addEventListener('mousedown', this.onStart);
     document.addEventListener('mousemove', this.onMove);
-    document.addEventListener('mouseend', this.onEnd);
+    document.addEventListener('mouseup', this.onEnd);
   }
 
   onStart (event) {
+    if (this.target) return;
     if (!event.target.classList.contains('card')) return;
     event.preventDefault();
 
@@ -39,8 +40,6 @@ class Cards {
     this.currentX = this.startX;
     this.target.style.willChange = 'transform';
     this.draggingCard = true;
-
-    console.log(this.targetBoundingClientRect);
 
     requestAnimationFrame(this.update);
   }
@@ -79,6 +78,15 @@ class Cards {
 
     this.target.style.transform = `translateX(${this.screenX}px)`;
     this.target.style.opacity = opacity;
+
+    const isNearlyInvisible = opacity < 0.01;
+
+    if (!this.draggingCard && isNearlyInvisible) {
+      this.target.parentNode.removeChild(this.target);
+      this.target.style.willChange = 'initial';
+      this.target.style.transform = 'none';
+      this.target = null;
+    }
   }
 }
 
